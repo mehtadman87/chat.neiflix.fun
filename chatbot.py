@@ -16,6 +16,14 @@ from langchain_community.document_loaders import (
     UnstructuredImageLoader
 )
 
+
+# Configure AWS credentials from secrets
+if "aws_credentials" in st.secrets:
+    os.environ["AWS_ACCESS_KEY_ID"] = st.secrets["aws_credentials"]["AWS_ACCESS_KEY_ID"]
+    os.environ["AWS_SECRET_ACCESS_KEY"] = st.secrets["aws_credentials"]["AWS_SECRET_ACCESS_KEY"]
+    os.environ["AWS_DEFAULT_REGION"] = st.secrets["aws_credentials"]["AWS_DEFAULT_REGION"]
+
+
 # Initialize session states
 if "messages" not in st.session_state:
     st.session_state.messages = []
